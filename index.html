@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111111">
+<title>Castle Ravenloft Navigator</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Garamond", "Times New Roman", serif;
+  background: #111;
+  color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+#map-wrapper {
+  overflow: auto;
+  touch-action: pan-x pan-y;
+}
+	
+.container {
+  max-width: 700px;
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-bottom: 40px;
+  color: #aaa;
+}
+
+.enter a {
+  display: inline-block;
+  padding: 18px 40px;
+  font-size: 20px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  color: #eee;
+  background: linear-gradient(145deg, #1a1a1a, #2b0000);
+  border: 2px solid #555;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.enter a:hover {
+  background: darkred;
+  border-color: #aaa;
+  box-shadow: 0 0 20px rgba(150, 0, 0, 0.7);
+  transform: scale(1.05);
+}
+
+
+
+.floor-list a {
+  display: block;
+  padding: 12px;
+  background: #222;
+  border: 1px solid #555;
+  color: #eee;
+  text-decoration: none;
+  transition: 0.2s ease;
+  min-width: 150px;
+  text-align: center;
+}
+
+}
+
+.floor-list a:hover {
+  background: darkred;
+  border-color: #aaa;
+}
+
+.footer {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #666;
+}
+</style>
+</head>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
+
+<body>
+
+<div class="container">
+
+  <h1>Castle Ravenloft</h1>
+  <div class="subtitle">
+    Interactive Dungeon Master Map Interface<br>
+    Curse of Strahd – Chapter 4
+  </div>
+
+<div class="enter">
+  <a href="walls.html">Enter Castle Ravenloft</a>
+</div>
+
+
+  <div class="footer">
+    Built for Dungeon Master use only.
+	
+	Made by u/UnclePlants
+  </div>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
+
+</div>
+
+</body>
+</html>

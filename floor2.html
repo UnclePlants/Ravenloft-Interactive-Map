@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Castle Ravenloft</title>
+
+<style>
+body {
+  margin: 0;
+  display: flex;
+  height: 100vh;
+}
+
+/* LEFT SIDE — SCROLLABLE MAP */
+#map-wrapper {
+  width: 70%;
+  height: 100vh;
+  overflow-y: auto;
+  background: #111;
+}
+
+#map-inner {
+  position: relative;
+  width: 100%;
+}
+
+#map-inner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* RIGHT SIDE — FIXED INFO PANEL */
+#info {
+  width: 30%;
+  height: 100vh;
+  overflow-y: auto;
+  background: #222;
+  color: white;
+  padding: 15px;
+
+}
+
+
+.room {
+  position: absolute;
+
+  width: 2vw;
+  height: 1.5vw;
+
+  background: black;
+  color: white;
+  border: 1px solid white;
+  border-radius: 999px; /* better for oval pills */
+
+  font-size: 0.7vw;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;      /* vertical center */
+  justify-content: center;  /* horizontal center */
+}
+.player-text {
+  background: #0f1a2b;
+  border: 1px solid #2a3f66;
+  padding: 12px;
+  border-radius: 4px;
+  color: #cfe4ff;
+
+}
+.section-title {
+  margin-top: 18px;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: #cccccc;
+  border-top: 1px solid #555;
+  padding-top: 6px;
+}
+
+
+.dm-text {
+  color: white;     /* standard DM notes */
+  padding: 12px;
+  padding-bottom: 12px;
+
+}
+.section-title {
+  margin-top: 18px;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: #cccccc;
+  border-top: 1px solid #555;
+  padding-top: 6px;
+
+
+}
+.room.nav {
+  width: 120px;           /* rectangle width */
+  height: 28px;           /* rectangle height */
+  border-radius: 4px;     /* slightly rounded corners */
+  background: darkred;    /* different color from normal rooms */
+  border: 2px solid white;
+  color: white;
+  font-size: 10px;
+  line-height: 28px;      /* center text vertically */
+  text-align: center;
+  cursor: pointer;
+
+
+}
+#room-code {
+  color: #c65a00;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-right: 10px;
+  text-shadow: 0 0 4px #400000;
+}
+#title-box {
+  background: #181818;
+  border: 1px solid #333;
+  padding: 14px;
+  margin-bottom: 18px;
+  border-radius: 6px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#title {
+  font-size: 20px;
+  font-weight: 600;
+    color:  #c65a00;
+}
+}
+#search-container {
+  margin-bottom: 15px;
+}
+
+#search {
+  width: 100%;
+  padding: 8px 10px;
+  background: #111;
+  border: 1px solid #444;
+  color: #eee;
+  font-family: inherit;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+#search:focus {
+  outline: none;
+  border-color: #a06030;
+}
+#search {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  background: #111;
+  color: white;
+  border: 1px solid #555;
+}
+
+#search-results {
+  max-height: 200px;
+  overflow-y: auto;
+  background: #1a1a1a;
+  border: 1px solid #444;
+  display: none;
+}
+
+.search-item {
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+.search-item:hover {
+  background: darkred;
+}
+.tombstone-text {
+  background: linear-gradient(#3a3a3a, #2a2a2a);
+  border: 2px solid #555;
+  padding: 14px;
+  margin: 18px 0;
+  border-radius: 6px;
+
+  font-family: "Georgia", serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-align: center;
+
+  color: #d6d2c4;
+
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,0.8),
+    0 2px 6px rgba(0,0,0,0.6);
+
+  text-transform: uppercase;
+}
+</style>
+</head>
+
+<body>
+
+<div id="map-wrapper">
+  <div id="map-inner">
+    <img src="floor2.webp">
+ <!-- FLOOR 2 BUTTONS -->
+<button class="room" style="top:21.29%; left:20.83%;" onclick="show('K46')">K46</button>
+<button class="room" style="top:18.03%; left:44.01%;" onclick="show('K46')">K46</button>
+<button class="room" style="top:75.11%; left:21.39%;" onclick="show('K46')">K46</button>
+<button class="room" style="top:78.63%; left:44.29%;" onclick="show('K46')">K46</button>
+<button class="room" style="top:74.43%; left:44.29%;" onclick="show('K64')">K64</button>
+<button class="room" style="top:68.74%; left:54.28%;" onclick="show('K21')">K21</button>
+<button class="room" style="top:60.6%; left:60.59%;" onclick="show('K18a')">K18a</button>
+<button class="room" style="top:62.5%; left:44.48%;" onclick="show('K35')">K35</button>
+<button class="room" style="top:70.77%; left:38.45%;" onclick="show('K36')">K36</button>
+<button class="room" style="top:70.77%; left:27.04%;" onclick="show('K44')">K44</button>
+<button class="room" style="top:60.74%; left:27.14%;" onclick="show('K43')">K43</button>
+<button class="room" style="top:47.86%; left:24.41%;" onclick="show('K42')">K42</button>
+<button class="room" style="top:40.27%; left:21.49%;" onclick="show('K46')">K46</button>
+<button class="room" style="top:46.37%; left:44.1%;" onclick="show('K37')">K37</button>
+<button class="room" style="top:45.55%; left:49.85%;" onclick="show('K38')">K38</button>
+<button class="room" style="top:47.99%; left:58.9%;" onclick="show('K39')">K39</button>
+<button class="room" style="top:48.13%; left:67.38%;" onclick="show('K40')">K40</button>
+<button class="room" style="top:37.55%; left:64.17%;" onclick="show('K41')">K41</button>
+<button class="room" style="top:29.69%; left:64.36%;" onclick="show('K46')">K46</button>
+<button class="room" style="top:29.28%; left:32.6%;" onclick="show('K45')">K45</button>
+<button class="room" style="top:36.47%; left:31.29%;" onclick="show('K83')">K83</button>
+<button class="room" style="top:54.37%; left:61.53%;" onclick="show('K18')">K18</button>
+<button class="room" style="top:58.43%; left:51.36%;" onclick="show('K31a')">K31a</button>
+<button class="room" style="top:54.91%; left:52.96%;" onclick="show('K31b')">K31b</button>
+<button class="room nav" style="top:0.5%; left:20%;" onclick="window.location.href='floor1.html'">Go Downstairs</button>
+<button class="room nav" style="top:0.5%; left:60%;" onclick="window.location.href='floor3,4,5,6,7.html'">Go Upstairs</button>
+</div>
+</div>
+
+<div id="info">
+
+  <input id="search" placeholder="Search..." autocomplete="off">
+  <div id="search-results"></div>
+
+  <div id="title-box">
+    <span id="room-code"></span>
+    <span id="title"></span>
+  </div>
+
+  <div id="content">Click a number.</div>
+
+</div>
+
+
+<script src="rooms.js"></script>
+
+<script src="rooms.js"></script>
+
+<script>
+
+// ======================
+// ROOM DISPLAY FUNCTION
+// ======================
+
+function show(room) {
+
+  const data = ROOMS[room];
+  if (!data) return;
+
+  const codeEl = document.getElementById("room-code");
+  const titleEl = document.getElementById("title");
+  const contentEl = document.getElementById("content");
+
+  codeEl.innerText = room;
+  titleEl.innerText = data.title;
+  contentEl.innerHTML = "";
+
+  data.sections.forEach(section => {
+
+    const block = document.createElement("div");
+
+    if (section.type === "read") {
+      block.className = "player-text";
+    } 
+    else if (section.type === "subtitle") {
+      block.className = "section-title";
+    } 
+    else if (section.type === "tombstone") {
+  block.className = "tombstone-text";
+    }
+    else {
+      block.className = "dm-text";
+    }
+
+    block.innerText = section.text.trim();
+    contentEl.appendChild(block);
+
+  });
+}
+
+
+// ======================
+// SEARCH SYSTEM
+// ======================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const searchInput = document.getElementById("search");
+  const resultsBox = document.getElementById("search-results");
+
+  searchInput.addEventListener("input", function () {
+
+    const query = this.value.toLowerCase().trim();
+    resultsBox.innerHTML = "";
+
+    if (!query) {
+      resultsBox.style.display = "none";
+      return;
+    }
+
+    let count = 0;
+    const MAX_RESULTS = 20;
+
+    for (const key in ROOMS) {
+
+      if (count >= MAX_RESULTS) break;
+
+      const room = ROOMS[key];
+
+      let fullText = key + " " + room.title;
+
+      room.sections.forEach(section => {
+        if (section.text) {
+          fullText += " " + section.text;
+        }
+      });
+
+      if (fullText.toLowerCase().includes(query)) {
+
+        const item = document.createElement("div");
+        item.className = "search-item";
+        item.innerText = `${key} — ${room.title}`;
+
+        item.onclick = () => {
+          show(key);
+          resultsBox.style.display = "none";
+          searchInput.value = "";
+        };
+
+        resultsBox.appendChild(item);
+        count++;
+      }
+    }
+
+    resultsBox.style.display =
+      resultsBox.children.length ? "block" : "none";
+
+  });
+
+});
+</script>
+
+
+</body>
+</html>
